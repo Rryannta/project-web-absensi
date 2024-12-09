@@ -1,0 +1,105 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+main h1 {
+  font-size: 2rem;
+  font-weight: 550;
+  margin: 30px 0px 50px 0px;
+}
+
+.container-all {
+  display: flex;
+}
+
+.container-form {
+  padding: 20px 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.nama {
+  display: flex;
+  border: 1.5px solid #333;
+  padding: 14px 25px 14px 12px;
+  border-radius: 12px;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.nama input {
+  width: 400px;
+  font-size: 16px;
+}
+
+.nama i {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.nama input::placeholder{
+  font-size: 16px;
+}
+
+.tanggal {
+  width: 500px;
+  padding: 14px 25px 14px 12px;
+  border: 1.5px solid #333;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.keterangan-kehadiran {
+  border: 1.5px solid #333;
+  padding: 14px 25px 14px 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between  ;
+}
+
+.keterangan-kehadiran span {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.keterangan-kehadiran select , 
+option{
+  font-size: 16px;
+}
+
+button {
+  width: 70px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: transparent;
+  border: 1.5px solid #333;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .2s;
+}
+
+button:hover {
+  box-shadow: 0 0 15px black;
+  background-color: #333;
+  color: #fff;
+}
+
+img {
+  width: 44.5rem;
+  height: 100vh;
+  object-fit: cover;
+}

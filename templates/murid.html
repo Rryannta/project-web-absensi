@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absensi Kelas TKJ 1</title>
+  
+  <!-- Style -->
+  <link rel="stylesheet" href="{{url_for('static',filename='style/murid.css')}}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- logo -->
+  <link rel="Icon" href="{{url_for('static',filename='img/SMK_LOGO.png')}}">
+  
+  <!-- icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+<body>
+  <main>
+    <div class="container-all">
+      <div class="container-form">
+        <h1>Absen murid TKJ SMKN 1 Kediri</h1>
+        <form action="" method="POST" class="form" enctype="multipart/form-data">
+          <div class="nama">
+            <input type="text" placeholder="masukkan nama anda" name="name">
+            <i class="fa-regular fa-keyboard"></i>
+          </div>
+          <input class="tanggal" type="date" name="date">
+          <div class="keterangan-kehadiran">
+            <div class="select-option">
+              <span>Keterangan hadir : </span>
+              <select name="keterangan" id="">
+                <option value="hadir">hadir</option>
+                <option value="sakit">sakit</option>
+                <option value="izin">izin</option>
+              </select>
+            </div>
+            <i class="fa-solid fa-hand"></i>
+          </div>
+          <div class="alasan">
+            <span>Alasan jika izin : </span>
+            <textarea id="alasan" name="alasan"></textarea>
+          </div>
+          <div class="bukti-alasan">
+            <span>Bukti jika sakit , dan bukti tidak masuk dengan kirim foto surat alasan beserta ktp orang tua (3mb) , nama file ( nama_keterangan-kehadiran ) : </span>
+            <input type="file" accept="
+            image/png, image/jpeg" name="file">
+          </div>
+          <button type="submit">Kirim</button>
+        </form>
+      </div>
+      <img src="{{url_for('static',filename='img/hero-image-guru.jpg')}}" alt="">
+    </div>
+  </main>
+</body>
+</html>
