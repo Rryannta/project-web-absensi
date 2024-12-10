@@ -9,3 +9,5 @@ class Database:
       database= "absensi_tkj1"
     )
     return conn
+  
+  # digunakan untuk connect database

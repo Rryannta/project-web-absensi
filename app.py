@@ -1,10 +1,10 @@
 from flask import Flask, render_template , request , redirect, flash, make_response
-from config import Database
+from config import Database # connect file config.py ke app.py / connect database
 import os
-from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename 
 from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
-from datetime import datetime
+from datetime import datetime # library waktu 
 import mysql.connector
 import pandas as pd
 
@@ -27,27 +27,27 @@ def connect_to_database():
 
 @app.route('/')
 def home():
-    # Menggunakan file index.html dari folder templates
+    # Menggunakan file login.html dari folder templates
     return render_template('login.html')
 
 @app.route('/success')
 def success():
 
-    # Menggunakan file index.html dari folder templates
+    # Menggunakan file success.html dari folder templates
     return render_template('success.html')
 
 @app.route('/gambar')
 def gambar():
     db = Database
     conn = db.connect_to_database()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM siswa")
-    hasil = cursor.fetchall()
+    cursor = conn.cursor() # untuk mengeksekusi query sql
+    cursor.execute("SELECT * FROM siswa") # memilih semua data dari tabel siswa
+    hasil = cursor.fetchall() # menyimpan dan mengambil semua data dari tabel yg sudah dipilih
     conn.close()
-    return render_template('image.html', results=hasil)
+    return render_template('image.html', results=hasil) 
 
 
-@app.route('/image/<int:image_id>')
+@app.route('/image/<int:image_id>') 
 def get_image(image_id):
     conn = connect_to_database()
     cursor = conn.cursor()
@@ -65,39 +65,39 @@ def get_image(image_id):
     
 @app.route('/guru', methods=['POST', 'GET'])
 def about_guru():
-    if request.method == 'POST' :
+    if request.method == 'POST' : # Jika method POST
         nama = request.form.get('nama')
         tanggal = request.form.get('tanggal')
-        kehadiran = request.form.get('kehadiran')
+        kehadiran = request.form.get('kehadiran') # diambil dari name yang ada dihtml
 
         db = Database
         conn = db.connect_to_database()
-        cursor = conn.cursor()
+        cursor = conn.cursor() # untuk mengeksekusi query sql
         cursor.execute('INSERT INTO guru (Name, Date, Status) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE Date = VALUES(Date), Status = VALUES(Status)',
-        (nama, tanggal, kehadiran))
-        conn.commit()
+        (nama, tanggal, kehadiran)) # memasukkan data ke tabel guru
+        conn.commit() # untuk menyimpan perubahan data
         cursor.close()
         conn.close()
         return redirect('/success')
-    # Menggunakan file about.html dari folder templates
+    # Menggunakan file guru.html dari folder templates
     return render_template('guru.html')
 
 
 @app.route('/murid', methods=['POST', 'GET'])
 def about_murid():
     if request.method == 'POST' :
-        if 'file' not in request.files:
+        if 'file' not in request.files: # Jika tidak ada file yang diupload
             flash('No file part')
-            return redirect(request.url)
+            return redirect(request.url) # kembali ke halaman sebelumnya
 
-        file = request.files['file']
+        file = request.files['file'] # mengambil file yang diupload
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
 
         if file:
-            filename = secure_filename(file.filename)
-            filedata = file.read()
+            filename = secure_filename(file.filename) # mengambil nama file
+            filedata = file.read() # membaca isi file
         
         name = request.form.get('name')
         date = request.form.get('date')
@@ -113,7 +113,7 @@ def about_murid():
         cursor.close()
         conn.close()
         return redirect('/success')
-        # Menggunakan file about.html dari folder templates
+        # Menggunakan file murid.html dari folder templates
     return render_template('murid.html')
 
 def export_to_excel():
@@ -151,9 +151,9 @@ def export_to_excel():
     except Exception as e:
         print(f"Error saat mengekspor data: {e}")
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(export_to_excel, 'cron', hour=20, minute=46)
-scheduler.start()
+scheduler = BackgroundScheduler() # Membuat scheduler
+scheduler.add_job(export_to_excel, 'cron', hour=7, minute=7) # Menjadwalkan ekspor data setiap hari pukul 07:07
+scheduler.start() 
 
 if __name__ == '__main__':
     app.run(debug=True)
